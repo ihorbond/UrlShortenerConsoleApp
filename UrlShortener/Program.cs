@@ -1,13 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using CommandLine;
 
+using shortid;
+using shortid.Configuration;
+
+using UrlShortener;
 using UrlShortener.Data;
 using UrlShortener.DTOs;
 using UrlShortener.Enums;
 using UrlShortener.Models;
-using shortid;
-using shortid.Configuration;
-using UrlShortener;
 
 Parser.Default.ParseArguments<CliOptions>(args)
        .WithParsed(o =>
@@ -35,12 +36,13 @@ do
     string command = Console.ReadLine() ?? "";
 
     bool success = Enum.TryParse(value: command, ignoreCase: true, out parsedCommand);
-    if(!success)
+    if (!success)
     {
         Console.WriteLine("Invalid Command");
-    } else
+    }
+    else
     {
-        switch(parsedCommand)
+        switch (parsedCommand)
         {
             case Commands.Get:
                 {
@@ -93,10 +95,10 @@ do
 
                     var result = ctx.Urls.FirstOrDefault(x => x.ShortUrl == url);
 
-                    if(result is null)
+                    if (result is null)
                     {
                         Console.WriteLine("Match not found.");
-                    } 
+                    }
                     else
                     {
                         ctx.Urls.Remove(result);
@@ -134,7 +136,7 @@ do
                     string shortUrl = $"{PREFIX}/{id}";
 
                     var result = ctx.Urls.FirstOrDefault(x => x.ShortUrl == shortUrl);
-                    if(result is not null)
+                    if (result is not null)
                     {
                         Console.WriteLine($"Provided ID '{id}' is already in use. Please use a different ID.");
                     }

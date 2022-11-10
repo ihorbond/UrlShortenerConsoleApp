@@ -6,12 +6,12 @@ namespace UrlShortener.Data
 {
     public class AppDbContext : DbContext
     {
-        protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseInMemoryDatabase(databaseName: "UrlShortener");
         }
 
-        public DbSet<Url> Urls{ get; set; }
+        public DbSet<Url> Urls { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
